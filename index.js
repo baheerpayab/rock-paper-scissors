@@ -4,7 +4,6 @@ let playerChoice;
 let round = 1;
 let playerWins = 0;
 let computerWins = 0;
-let noWins = 0;
 
 function getComputerChoice() {
     let random = Math.floor(Math.random() * choices.length);
@@ -19,7 +18,6 @@ function playRound() {
     console.log("Computer chose" + " " + computerChoice.toUpperCase() + "!");
      if (computerChoice.toUpperCase() == playerChoice.toUpperCase()) {
         console.log("Tie!");
-        noWins++;
     } if (computerChoice == "rock" && playerChoice.toUpperCase() == "PAPER") {
         console.log("You Win!");
         playerWins++;
@@ -41,21 +39,36 @@ function playRound() {
     }
 }  
 
+function checkWinner() {
+    if (computerWins == 3 || playerWins == 3 || round == 5) {
+        round = 5;
+        results();
+    }
+}
+
 function results() {
+    console.log("Computer:" + " " + computerWins)
+    console.log("Player:" + " " + playerWins)
+    if (computerWins > playerWins) {
+        console.log("Computer Wins!");
+    } if (playerWins > computerWins) {
+        console.log("You Win!");
+    } if (playerWins == computerWins) {
+        console.log("You Tied!")
+    }
     console.log("Results");
 }
 
 function game() {
-    if (computerWins == 1 || playerWins == 1) {
-        results();
-    } else {
-        for (round = 1; round <= 5; round++) {
-            playRound();
-            console.log(round)
-            console.log(playerWins);
-            console.log(computerWins);
+
+    for (round = 1; round <= 5; round++) {
+        playRound();
+        console.log(round)
+        console.log(playerWins);
+        console.log(computerWins);
+        checkWinner();
         }
-    }
+    
 }
 
 
