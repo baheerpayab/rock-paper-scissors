@@ -4,6 +4,30 @@ let playerChoice;
 let round = 1;
 let playerWins = 0;
 let computerWins = 0;
+let gameButton = document.querySelectorAll(".button");
+
+/*
+TO ADD -
+roundsPlayed and currentRound counters
+disable button EventListener if roundsPlayed = 9
+Remove case-insensitivity for playerChoice
+Display player and computer choices
+Display round winner
+Display BO9 winner
+Display reset button after BO9 is completed
+*/
+
+gameButton.forEach((button) => {
+    button.addEventListener("click", () => {
+        playerChoice = button.id;
+        playRound();
+    })
+
+});
+
+document.getElementById("rounds").innerHTML = round;
+    document.getElementById("playerScore").innerText = playerWins;
+    document.getElementById("computerScore").innerText = computerWins;
 
 function getComputerChoice() {
     let random = Math.floor(Math.random() * choices.length);
@@ -13,7 +37,7 @@ function getComputerChoice() {
 
 function playRound() {
     getComputerChoice();
-    playerChoice = prompt("Write rock, paper, or scissors");
+    // playerChoice = prompt("Write rock, paper, or scissors");
     console.log("You chose" + " " + playerChoice.toUpperCase() + "!");
     console.log("Computer chose" + " " + computerChoice.toUpperCase() + "!");
      if (computerChoice.toUpperCase() == playerChoice.toUpperCase()) {
@@ -37,11 +61,13 @@ function playRound() {
         console.log("You Lose!");
         computerWins++;
     }
+    game();
+    checkWinner();
+
 }  
 
 function checkWinner() {
-    if (computerWins == 3 || playerWins == 3 || round == 5) {
-        round = 5;
+    if (computerWins == 5 || playerWins == 5 || round == 9) {
         results();
     }
 }
@@ -60,16 +86,14 @@ function results() {
 }
 
 function game() {
-
-    for (round = 1; round <= 5; round++) {
-        playRound();
-        console.log(round)
-        console.log(playerWins);
-        console.log(computerWins);
-        checkWinner();
+        if (round < 9) {
+        round++;
         }
+        document.getElementById("rounds").innerHTML = round;
+        document.getElementById("playerScore").innerText = playerWins;
+        document.getElementById("computerScore").innerText = computerWins;
     
 }
 
 
-game();
+//game();
