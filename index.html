@@ -1,24 +1,49 @@
  <!DOCTYPE html>
 <html lang="en">
 <head>
+    <title>Rock, Paper, Scissors</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bungee+Outline&family=Raleway+Dots&family=Zen+Kurenaido&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+
+
 </head>
 <body>
-    <h1>Rock, Paper, Scissors</h1>
-    <h2>Best of 9</h2>
+    <h1 class="title">ROCK PAPER SCISSORS</h1>
     <div class="buttons">
-        <button id="rock" type="button" class="button">Rock</button>
-        <button id="paper" type="button" class="button">Paper</button>
-        <button id="scissors" type="button" class="button">Scissors</button>
+        <button id="rock" type="button" class="button"><img src="images/rock-icon.png"></button>
+        <button id="paper" type="button" class="button"><img src="images/paper-icon.png"></button>
+        <button id="scissors" type="button" class="button"><img src="images/scissors-icon.png"></button>
     </div>
-    <div class="info">
-        <p id="rounds"></p>
-        <p id="playerScore"></p>
-        <p id="computerScore"></p>
+    <div class="infoRow">
+        <div class="info">
+            <p>PLAYER</p>
+            <p id="playerWins"></p>
+        </div>
+        <div class="info">
+            <p>ROUND</p>
+            <p id="rounds"></p>
+        </div>
+        <div class="info">
+            <p>COMPUTER</p>
+            <p id="computerWins"></p>
+        </div>
     </div>
-    <!--Add reset button-->
+    <div class="commentateBox">
+        <p id="moves">FIRST TO 5 WINS</p>
+        <p id="results"></p>
+    </div>
+    <button type="button" id="restartButton" class="hidden"><span id="reficon" class="material-symbols-outlined">
+        refresh
+        </span></button>
     <script src="index.js"></script>
 </body>
 </html>

@@ -1,0 +1,111 @@
+body {
+    background-color: black;
+    color: white;
+    font-family: "Barlow", sans-serif;
+}
+
+h1 {
+    font-family: 'Bungee Outline', cursive;
+}
+
+.title {
+    font-weight: 300;
+    font-style: normal;
+    font-size: 80px;
+    margin: auto;
+    text-align: center;
+    margin-top: 50px;
+    color: white;
+    text-shadow:
+    0 0 7px #fff,
+    0 0 120px rgb(255, 255, 255);
+}
+
+.commentateBox {
+    display:block;
+    margin: auto;
+    text-align: center;
+    width: auto;
+}
+
+#results {
+    font-size: 30px;
+}
+
+.infoRow {
+    display: flex;
+    align-items: center;
+    margin: auto;
+    margin-top: 40px;
+    margin-bottom: 30px;
+    font-size: 20px;
+    justify-content: space-evenly
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.info > p {
+    margin: auto -100px;
+    font-size: 25px;
+}
+
+#playerWins, #computerWins, #rounds {
+    font-size: 50px;
+}
+
+h2 {
+    font-weight: 200;
+    text-align: center;
+    margin: auto;
+    font-size: 25px;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    gap: 50px;
+    margin: auto;
+    width: 60%;
+    scale: 0.7;
+    margin-top: 0px;
+}
+
+.button {
+    border: none;
+    background-color: black;
+    background-blend-mode: multiply;
+    transition: 0.5s;
+}
+
+[type="button"]:hover {
+    scale: 1.1;
+    cursor: pointer;
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+#restartButton {
+    display: block;
+    margin: auto;
+    padding-top: 10px;
+    background: none;
+    border: none;
+    color: white;
+    scale: 3;
+}
+
+#reficon {
+    transition: rotate 1s, visibility 0s;
+}
+
+#reficon:hover {
+    transform-origin: center;
+    rotate: 360deg;
+}

@@ -1,73 +1,114 @@
-const choices = ["rock", "paper", "scissors"];
+const choices = ["ROCK", "PAPER", "SCISSORS"];
 let computerChoice;
 let playerChoice;
-let round = 1;
+let currentRound = 1;
+let roundsPlayed = 0;
 let playerWins = 0;
 let computerWins = 0;
-let gameButton = document.querySelectorAll(".button");
+const rockButton = document.getElementById("rock")
+const scissorsButton = document.getElementById("scissors")
+const paperButton = document.getElementById("paper")
+let restart = document.getElementById("restartButton");
+let roundsTxt = document.getElementById("rounds");
+let playerWinsTxt = document.getElementById("playerWins");
+let computerWinsTxt = document.getElementById("computerWins");
+let moves = document.getElementById("moves");
+let resultsTxt = document.getElementById("results")
 
 /*
 TO ADD -
-roundsPlayed and currentRound counters
-disable button EventListener if roundsPlayed = 9
-Remove case-insensitivity for playerChoice
+disable button EventListener if round = 9
 Display player and computer choices
 Display round winner
 Display BO9 winner
 Display reset button after BO9 is completed
 */
 
-gameButton.forEach((button) => {
+/*gameButton.forEach((button) => {
     button.addEventListener("click", () => {
-        playerChoice = button.id;
+        playerChoice =  button.id.toUpperCase();
         playRound();
     })
+    });*/
 
-});
 
-document.getElementById("rounds").innerHTML = round;
-    document.getElementById("playerScore").innerText = playerWins;
-    document.getElementById("computerScore").innerText = computerWins;
+rockButton.addEventListener ("click", playRock);
+paperButton.addEventListener ("click", playPaper);
+scissorsButton.addEventListener ("click", playScissors);
+
+roundsTxt.textContent = `${currentRound}`;
+playerWinsTxt.textContent = `${playerWins}`;
+computerWinsTxt.textContent = `${computerWins}`;
+
+function restartGame() {
+    currentRound = 1;
+    roundsPlayed = 0;
+    playerWins = 0;
+    computerWins = 0;
+    roundsTxt.textContent = `${currentRound}`;
+    playerWinsTxt.textContent = `${playerWins}`;
+    computerWinsTxt.textContent = `${computerWins}`;
+    rockButton.addEventListener ("click", playRock);
+    paperButton.addEventListener ("click", playPaper);
+    scissorsButton.addEventListener ("click", playScissors);
+    moves.textContent = "FIRST TO 5 WINS";
+    resultsTxt.textContent = "";
+    restart.classList.add("hidden");
+}
+
+function playRock() {
+    playerChoice = rockButton.id.toUpperCase();
+    playRound();
+}
+
+function playPaper() {
+    playerChoice = paperButton.id.toUpperCase();
+    playRound();
+}
+
+function playScissors() {
+    playerChoice = scissorsButton.id.toUpperCase();
+    playRound();
+}
 
 function getComputerChoice() {
     let random = Math.floor(Math.random() * choices.length);
     computerChoice = (choices[random]);
-    return 
 }
 
 function playRound() {
     getComputerChoice();
     // playerChoice = prompt("Write rock, paper, or scissors");
-    console.log("You chose" + " " + playerChoice.toUpperCase() + "!");
-    console.log("Computer chose" + " " + computerChoice.toUpperCase() + "!");
-     if (computerChoice.toUpperCase() == playerChoice.toUpperCase()) {
-        console.log("Tie!");
-    } if (computerChoice == "rock" && playerChoice.toUpperCase() == "PAPER") {
-        console.log("You Win!");
+    console.log("You chose" + " " + playerChoice + "!");
+    console.log("Computer chose" + " " + computerChoice + "!");
+     if (computerChoice == playerChoice) {
+        moves.textContent = `YOU BOTH CHOSE ${playerChoice}! YOU TIED THE ROUND!`;
+    } if (computerChoice == "ROCK" && playerChoice == "PAPER") {
+        moves.textContent = `COMPUTER CHOSE ROCK! YOU WON THE ROUND!`;
         playerWins++;
-    } if (computerChoice == "rock" && playerChoice.toUpperCase() == "SCISSORS") {
-        console.log("You Lose!");
+    } if (computerChoice == "ROCK" && playerChoice == "SCISSORS") {
+        moves.textContent = `COMPUTER CHOSE ROCK! YOU LOST THE ROUND!`;
         computerWins++;
-    } if (computerChoice == "paper" && playerChoice.toUpperCase() == "SCISSORS") {
-        console.log("You Win!");
+    } if (computerChoice == "PAPER" && playerChoice == "SCISSORS") {
+        moves.textContent = `COMPUTER CHOSE PAPER! YOU WON THE ROUND!`;
         playerWins++;
-    } if (computerChoice == "paper" && playerChoice.toUpperCase() == "ROCK") {
-        console.log("You Lose!");
+    } if (computerChoice == "PAPER" && playerChoice == "ROCK") {
+        moves.textContent = `COMPUTER CHOSE PAPER! YOU LOST THE ROUND`;
         computerWins++;
-    } if (computerChoice == "scissors" && playerChoice.toUpperCase() == "ROCK") {
-        console.log("You Win!");
+    } if (computerChoice == "SCISSORS" && playerChoice == "ROCK") {
+        moves.textContent = `COMPUTER CHOSE SCISSORS! YOU WON THE ROUND!`;
         playerWins++;
-    } if (computerChoice == "scissors" && playerChoice.toUpperCase() == "PAPER") {
-        console.log("You Lose!");
+    } if (computerChoice == "SCISSORS" && playerChoice == "PAPER") {
+        moves.textContent = `COMPUTER CHOSE SCISSORS! YOU LOST THE ROUND!`;
         computerWins++;
     }
-    game();
+    roundsUpdater();
     checkWinner();
 
 }  
 
 function checkWinner() {
-    if (computerWins == 5 || playerWins == 5 || round == 9) {
+    if (computerWins == 5 || playerWins == 5) {
         results();
     }
 }
@@ -76,22 +117,30 @@ function results() {
     console.log("Computer:" + " " + computerWins)
     console.log("Player:" + " " + playerWins)
     if (computerWins > playerWins) {
-        console.log("Computer Wins!");
+        resultsTxt.textContent = "COMPUTER WINS";
     } if (playerWins > computerWins) {
-        console.log("You Win!");
+        resultsTxt.textContent = "YOU WIN";
     } if (playerWins == computerWins) {
-        console.log("You Tied!")
+        resultsTxt.textContent = "NO WINNERS, YOU TIED";
     }
     console.log("Results");
+    rockButton.removeEventListener ("click", playRock);
+    paperButton.removeEventListener ("click", playPaper);
+    scissorsButton.removeEventListener ("click", playScissors);
+    restart.classList.remove("hidden");
+    restart.addEventListener("click", restartGame);
+    
+
 }
 
-function game() {
-        if (round < 9) {
-        round++;
-        }
-        document.getElementById("rounds").innerHTML = round;
-        document.getElementById("playerScore").innerText = playerWins;
-        document.getElementById("computerScore").innerText = computerWins;
+function roundsUpdater() {    
+            roundsPlayed++;
+            currentRound++;   
+        roundsTxt.textContent = `${currentRound}`;
+        playerWinsTxt.textContent = `${playerWins}`;
+        computerWinsTxt.textContent = `${computerWins}`;
+        console.log(roundsPlayed);
+        console.log(currentRound);
     
 }
 
