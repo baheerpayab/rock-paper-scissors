@@ -109,3 +109,30 @@ h2 {
     transform-origin: center;
     rotate: 360deg;
 }
+
+footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 10px;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    position:fixed;
+    bottom:0;
+    left:0;
+    right:0;
+    height: 30px;
+}
+
+.fa-github {
+    scale: 1.5;
+    color: white;
+}
+
+.fa-github:hover {
+    transition: 0.3s;
+    scale: 1.7;
+    rotate: 360deg;
+    cursor: pointer;
+}
